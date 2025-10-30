@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Animated Social Icons with Back Button</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #181818, #3a3a3a);
+        height: 100vh;
+        margin: 0;
+        font-family: "Lato", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: #fff;
+      }
+
+      /* Back button styling */
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ff4747;
+        color: #fff;
+        font-size: 22px;
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 50px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        margin-bottom: 50px;
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+        perspective: 800px;
+      }
+
+      .back-btn i {
+        margin-right: 10px;
+        font-size: 24px;
+        transition: transform 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: #ff6f6f;
+        transform: translateY(-5px) rotateX(8deg);
+        box-shadow: 0 10px 25px rgba(255, 71, 71, 0.6);
+      }
+
+      .back-btn:hover i {
+        transform: translateX(-5px);
+      }
+
+      /* Social buttons container */
+      .social-btns {
+        display: flex;
+        gap: 40px;
+        perspective: 1000px;
+      }
+
+      .btn {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        background: #222;
+        border-radius: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        transform-style: preserve-3d;
+        animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+      }
+
+      .btn .fa {
+        font-size: 80px;
+        transition: all 0.4s ease;
+      }
+
+      /* Colors */
+      .btn.facebook {
+        background: #3b5998;
+      }
+      .btn.twitter {
+        background: #1da1f2;
+      }
+      .btn.instagram {
+        background: #e4405f;
+      }
+      .btn.linkedin {
+        background: #0077b5;
+      }
+      .btn.skype {
+        background: #00aff0;
+      }
+
+      /* Hover effects */
+      .btn:hover {
+        transform: translateY(-20px) rotateY(15deg) rotateX(10deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .btn:hover .fa {
+        transform: scale(1.2) rotate(360deg);
+        color: #fff;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+      }
+
+      /* Floating animation */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotateX(0deg) rotateY(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotateX(5deg);
+        }
+      }
+
+      /* Pulsing animation */
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Back button -->
+    <a href="index.html" class="back-btn">
+      <i class="fa fa-arrow-left"></i> Back
+    </a>
+
+    <!-- Social icons -->
+    <div class="social-btns">
+      <a class="btn facebook" href=""https://www.facebook.com/j.k.biswas.5"><i class="fa fa-facebook"></i></a>
+      <a class="btn twitter" href=""https://x.com/jkbiswas17"><i class="fa fa-twitter"></i></a>
+      <a class="btn instagram" href=""https://www.instagram.com/j.k.biswas_620/?hl=en"><i class="fa fa-instagram"></i></a>
+      <a class="btn linkedin" href=""https://in.linkedin.com/in/jibak-kanti-biswas-816528218"><i class="fa fa-linkedin"></i></a>
+      <a class="btn github" href=""https://github.com/Jibak301"><i class="fa fa-github"></i></a>
+    </div>
+  </body>
+</html>

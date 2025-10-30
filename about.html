@@ -1,47 +1,132 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>About</title>
-    <link rel="stylesheet" href="styleAbout.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About me</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap");
+
+      * {
+        font-family: Nunito, sans-serif;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #9c27b0, #2196f3);
+        overflow-x: hidden;
+      }
+
+      .responsive-container-block {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .responsive-container-block.bigContainer {
+        width: 100%;
+        min-height: 100vh;
+        background-image: url("https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/bb29.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        animation: bgMove 10s ease-in-out infinite alternate;
+      }
+
+      @keyframes bgMove {
+        0% {
+          background-position: center;
+        }
+        100% {
+          background-position: right bottom;
+        }
+      }
+
+      .responsive-container-block.Container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 50px 30px;
+        max-width: 800px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        transform-style: preserve-3d;
+        transform: rotateY(5deg) rotateX(5deg);
+        animation: floatBox 6s ease-in-out infinite;
+      }
+
+      @keyframes floatBox {
+        0%,
+        100% {
+          transform: rotateY(5deg) rotateX(5deg) translateY(0px);
+        }
+        50% {
+          transform: rotateY(-5deg) rotateX(-5deg) translateY(-10px);
+        }
+      }
+
+      .text-blk.heading {
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #222;
+        text-shadow: 1px 1px 2px #ccc;
+      }
+
+      .text-blk.subHeading {
+        font-size: 18px;
+        text-align: center;
+        color: #555;
+        margin-bottom: 40px;
+      }
+
+      /* Back button */
+      .back-btn {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #2196f3, #9c27b0);
+        color: white;
+        cursor: pointer;
+        transition: 0.4s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .back-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        .text-blk.heading {
+          font-size: 30px;
+        }
+      }
+    </style>
   </head>
-<body>
-<div class="responsive-container-block bigContainer">
-    <div class="responsive-container-block Container">
-      <p class="text-blk heading">
-        About Us
-      </p>
-      <p class="text-blk subHeading">
-        I am a persuing B.C.A from Arka Jain University individual with a Bachelor's degree in DATA SCIENCE, seeking employment as a developer. I am passionate about consistently advancing my knowledge and skills. I have attended multiple seminars and boot camps on coding and game development.
-      </p>
-      <div class="social-icons-container">
-        <a class="social-icon">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-          <img class="socialIcon image-block" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/bb33.png">
-        </a>
-        <a class="social-icon">
-          <img class="socialIcon image-block" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/bb34.png">
-        </a>
-        <a class="social-icon">
-          <img class="socialIcon image-block" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/bb35.png">
-        </a>
-        <a class="social-icon">
-          <img class="socialIcon image-block" src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/bb36.png">
-        </a>
+
+  <body>
+    <div class="responsive-container-block bigContainer">
+      <div class="responsive-container-block Container">
+        <h1 class="text-blk heading">Welcome to About Us</h1>
+        <p class="text-blk subHeading">
+          I am a persuing B.C.A from Arka Jain University individual with a
+          Bachelor's degree in DATA SCIENCE, seeking employment as a developer.
+          I am passionate about consistently advancing my knowledge and skills.
+          I have attended multiple seminars and boot camps on coding and
+          game development.
+        </p>
+
+        <button class="back-btn" onclick="history.back()">← Back</button>
       </div>
     </div>
-</section>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-  AOS.init({offset:0});
-</script>
-<script>
-    function hamburg(){
-        const navbar = document.querySelector(".dropdown")
-        navbar.style.transform = "translateY(0px)"
-    }
-    function cancel(){
-        const navbar = document.querySelector(".dropdown")
-        navbar.style.transform = "translateY(-500px)"
-    }
-</script>
-</body>
+  </body>
 </html>
