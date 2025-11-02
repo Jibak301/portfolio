@@ -1,160 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D Animated Social Icons with Back Button</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Social Icons </title>
 
-    <!-- Google Fonts & Font Awesome -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css"
-      rel="stylesheet"
-    />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" />
 
-    <style>
-      body {
-        background: linear-gradient(135deg, #181818, #3a3a3a);
-        height: 100vh;
-        margin: 0;
-        font-family: "Lato", sans-serif;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        color: #fff;
-      }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Lato", sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      background: radial-gradient(circle at center, #0a0f29, #010315);
+      position: relative;
+    }
 
-      /* Back button styling */
-      .back-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: #ff4747;
-        color: #fff;
-        font-size: 22px;
-        text-decoration: none;
-        padding: 12px 28px;
-        border-radius: 50px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        margin-bottom: 50px;
-        transition: all 0.3s ease;
-        transform-style: preserve-3d;
-        perspective: 800px;
-      }
+    /* --- Animated glowing orbs --- */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+      filter: blur(80px);
+      animation: floatOrb 20s infinite ease-in-out alternate;
+      mix-blend-mode: screen;
+      transition: transform 0.4s ease;
+    }
 
-      .back-btn i {
-        margin-right: 10px;
-        font-size: 24px;
-        transition: transform 0.3s ease;
-      }
+    .orb:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: #ff007f;
+      top: 10%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+    .orb:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: #00b3ff;
+      bottom: 5%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+    .orb:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      background: #00ffb7;
+      top: 70%;
+      left: 25%;
+      animation-delay: 10s;
+    }
 
-      .back-btn:hover {
-        background: #ff6f6f;
-        transform: translateY(-5px) rotateX(8deg);
-        box-shadow: 0 10px 25px rgba(255, 71, 71, 0.6);
-      }
+    @keyframes floatOrb {
+      0% { transform: translateY(0px) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-50px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+    }
 
-      .back-btn:hover i {
-        transform: translateX(-5px);
-      }
+    /* Stars background */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      opacity: 0.3;
+      animation: twinkle 8s infinite linear;
+      z-index: 0;
+    }
 
-      /* Social buttons container */
-      .social-btns {
-        display: flex;
-        gap: 40px;
-        perspective: 1000px;
-      }
+    @keyframes twinkle {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
 
-      .btn {
-        position: relative;
-        width: 120px;
-        height: 120px;
-        background: #222;
-        border-radius: 30%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        transform-style: preserve-3d;
-        animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
-      }
+    /* Back button styling */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ff4747;
+      color: #fff;
+      font-size: 22px;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 50px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      margin-bottom: 50px;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+      z-index: 2;
+    }
 
-      .btn .fa {
-        font-size: 80px;
-        transition: all 0.4s ease;
-      }
+    .back-btn i {
+      margin-right: 10px;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
 
-      /* Colors */
-      .btn.facebook {
-        background: #3b5998;
-      }
-      .btn.twitter {
-        background: #1da1f2;
-      }
-      .btn.instagram {
-        background: #e4405f;
-      }
-      .btn.linkedin {
-        background: #0077b5;
-      }
-      .btn.skype {
-        background: #00aff0;
-      }
+    .back-btn:hover {
+      background: #ff6f6f;
+      transform: translateY(-5px) rotateX(8deg);
+      box-shadow: 0 10px 25px rgba(255, 71, 71, 0.6);
+    }
 
-      /* Hover effects */
-      .btn:hover {
-        transform: translateY(-20px) rotateY(15deg) rotateX(10deg);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      }
+    .back-btn:hover i {
+      transform: translateX(-5px);
+    }
 
-      .btn:hover .fa {
-        transform: scale(1.2) rotate(360deg);
-        color: #fff;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-      }
+    /* Stage for 4D cube */
+    .stage {
+      width: 300px;
+      height: 300px;
+      perspective: 1000px;
+      perspective-origin: 50% 50%;
+      margin-top: 20px;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
 
-      /* Floating animation */
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0) rotateX(0deg) rotateY(0deg);
-        }
-        50% {
-          transform: translateY(-15px) rotateX(5deg);
-        }
-      }
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 10s linear infinite;
+      transition: transform 0.5s ease;
+    }
 
-      /* Pulsing animation */
-      @keyframes pulse {
-        0%,
-        100% {
-          box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-        50% {
-          box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Back button -->
-    <a href="index.html" class="back-btn">
-      <i class="fa fa-arrow-left"></i> Back
-    </a>
+    .stage:hover .cube {
+      animation-play-state: paused;
+      transform: rotateX(25deg) rotateY(-25deg) scale(1.05);
+    }
 
-    <!-- Social icons -->
-    <div class="social-btns">
-      <a class="btn facebook" href=""https://www.facebook.com/j.k.biswas.5"><i class="fa fa-facebook"></i></a>
-      <a class="btn twitter" href=""https://x.com/jkbiswas17"><i class="fa fa-twitter"></i></a>
-      <a class="btn instagram" href=""https://www.instagram.com/j.k.biswas_620/?hl=en"><i class="fa fa-instagram"></i></a>
-      <a class="btn linkedin" href=""https://in.linkedin.com/in/jibak-kanti-biswas-816528218"><i class="fa fa-linkedin"></i></a>
-      <a class="btn github" href=""https://github.com/Jibak301"><i class="fa fa-github"></i></a>
+    /* Cube faces */
+    .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 80px;
+      border-radius: 20px;
+      color: white;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1),
+                  0 0 30px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, rgba(255,255,255,0.1),
+                                  rgba(0,0,0,0.4));
+    }
+
+    .front  { transform: translateZ(150px); background: #3b5998; }
+    .back   { transform: rotateY(180deg) translateZ(150px); background: #1da1f2; }
+    .right  { transform: rotateY(90deg) translateZ(150px); background: #e4405f; }
+    .left   { transform: rotateY(-90deg) translateZ(150px); background: #0077b5; }
+    .top    { transform: rotateX(90deg) translateZ(150px); background: #00aff0; }
+    .bottom { transform: rotateX(-90deg) translateZ(150px); background: #24292e; }
+
+    @keyframes spin {
+      0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+      25%  { transform: rotateX(20deg) rotateY(90deg) rotateZ(-10deg); }
+      50%  { transform: rotateX(40deg) rotateY(180deg) rotateZ(0deg); }
+      75%  { transform: rotateX(20deg) rotateY(270deg) rotateZ(10deg); }
+      100% { transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg); }
+    }
+
+    .face i {
+      transition: transform 0.5s ease;
+    }
+
+    .face:hover i {
+      transform: scale(1.3) rotate(360deg);
+      text-shadow: 0 0 20px #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Glowing background -->
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="stars"></div>
+
+  <!-- Back button -->
+  <a href="index.html" class="back-btn">
+    <i class="fa fa-arrow-left"></i> Back
+  </a>
+
+  <!-- 4D Rotating Cube -->
+  <div class="stage" id="stage">
+    <div class="cube" id="cube">
+      <div class="face front"><a href="https://www.facebook.com/j.k.biswas.5" target="_blank"><i class="fa fa-facebook"></i></a></div>
+      <div class="face back"><a href="https://x.com/jkbiswas17" target="_blank"><i class="fa fa-twitter"></i></a></div>
+      <div class="face right"><a href="https://www.instagram.com/j.k.biswas_620/?hl=en" target="_blank"><i class="fa fa-instagram"></i></a></div>
+      <div class="face left"><a href="https://in.linkedin.com/in/jibak-kanti-biswas-816528218" target="_blank"><i class="fa fa-linkedin"></i></a></div>
+      <div class="face top"><a href="https://join.skype.com" target="_blank"><i class="fa fa-skype"></i></a></div>
+      <div class="face bottom"><a href="https://github.com/Jibak301" target="_blank"><i class="fa fa-github"></i></a></div>
     </div>
-  </body>
+  </div>
+
+  <script>
+    // --- Parallax effect ---
+    const stage = document.getElementById('stage');
+    const orbs = document.querySelectorAll('.orb');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (window.innerWidth / 2 - e.pageX) / 25;
+      const y = (window.innerHeight / 2 - e.pageY) / 25;
+
+      // Tilt cube and stage
+      stage.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+
+      // Move glowing orbs slightly opposite to mouse
+      orbs.forEach((orb, i) => {
+        const factor = (i + 1) * 10;
+        orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+      });
+    });
+  </script>
+</body>
 </html>
