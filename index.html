@@ -1,360 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JIBAK Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JIBAK Portfolio </title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-    * {
-      padding: 0;
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      box-sizing: border-box;
-    }
+<style>
+:root{
+ --bg: 245 247 255;
+ --fg: 15 23 42;
+ --accent: 109 67 0;
+ --glass: rgba(255,255,255,.45);
+ --glass-border: rgba(255,255,255,.7);
+ --blur: 22px;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
 
-    html { overflow-x: hidden; }
-    body {
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(to right, rgb(255,255,255), rgb(254,215,173));
-    }
+body{
+ background: linear-gradient(135deg,#ffffff 0%,#f5efe4 100%);
+ color:rgb(var(--fg));
+ overflow-x:hidden;
+ min-height:100vh;
+ opacity:0;
+ transition:opacity 0.8s ease;
+}
+body.fade-in {opacity:1;}
+body.fade-out {opacity:0 !important;}
 
-    nav {
-      width: 100%;
-      height: 10vh;
-      position: sticky;
-    }
+/* Dark Mode */
+.dark {
+  --bg: 23 23 33;
+  --fg: 240 240 255;
+  --accent: 255 179 71;
+  --glass: rgba(255,255,255,.10);
+  --glass-border: rgba(255,255,255,.25);
+  background: linear-gradient(135deg, #0f0f14 0%, #1a1a24 100%);
+}
+.dark nav a { color: rgb(var(--fg)); }
 
-    .nav-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-    }
+/* Liquid Blobs */
+.blob{
+ position: fixed;filter: blur(70px);opacity:0.55;border-radius:50%;z-index:-1;
+ animation: float 14s ease-in-out infinite;
+}
+.blob:nth-child(1){width:450px;height:450px;top:-10%;left:-10%;background:rgba(var(--accent),.35);}
+.blob:nth-child(2){width:380px;height:380px;bottom:-10%;right:-6%;background:rgba(255,200,120,.35);animation-duration:19s;}
+@keyframes float{0%,100%{transform:translate(0,0);}50%{transform:translate(50px,-50px);}}
 
-    .logo {
-      color: black;
-      font-size: 2rem;
-      font-weight: bolder;
-    }
+/* Navbar */
+nav{
+ position:fixed;top:20px;left:50%;transform:translateX(-50%);
+ background: var(--glass);backdrop-filter: blur(var(--blur));
+ border:1px solid var(--glass-border);
+ border-radius:22px;padding:10px 28px;display:flex;gap:28px;align-items:center;
+ box-shadow:0 8px 22px rgba(0,0,0,.08);z-index:50;
+}
+nav a{text-decoration:none;font-weight:500;color:rgb(var(--fg));position:relative;}
+nav a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:0%;background:rgb(var(--accent));transition:.3s;}
+nav a:hover::after{width:100%;}
+#theme-toggle{cursor:pointer;font-size:1.35rem;}
 
-    .logo span {
-      color: rgb(109,67,0);
-      text-shadow: 0 0 10px rgb(109,67,0);
-    }
+/* Layout */
+section{display:flex;justify-content:center;align-items:center;min-height:100vh;padding-top:120px;}
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:60px;}
 
-    .hamburg, .cancel {
-      cursor: pointer;
-      position: absolute;
-      right: 15px;
-      top: 10px;
-      color: black;
-      font-size: 2rem;
-      display: none;
-    }
+/* Hero Cards */
+.card{
+ background:var(--glass);backdrop-filter:blur(var(--blur));
+ border-radius:28px;border:1px solid var(--glass-border);
+ padding:32px;box-shadow:0 8px 32px rgba(0,0,0,.08);
+ transition:0.4s;
+}
 
-    .nav-container .links {
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-    }
+/* Text */
+.hero-text{max-width:520px;}
+.hero-text h1{font-size:2.4rem;font-weight:700;line-height:1.2;}
+.typewriter{font-size:1.6rem;margin:10px 0;font-weight:600;}
+.typewriter span{
+ color:rgb(var(--accent));
+ border-right:3px solid rgb(var(--accent));
+ animation:blink 0.7s infinite;
+}
+@keyframes blink{50%{border-color:transparent;}}
+p{margin:12px 0;line-height:1.6;opacity:.85;}
 
-    .nav-container .links a {
-      position: relative;
-      font-size: 1.2rem;
-      color: black;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s linear;
-    }
+/* Social */
+.social-links i{
+ width:42px;height:42px;border-radius:50%;display:inline-flex;justify-content:center;align-items:center;
+ border:2px solid rgb(var(--accent));color:rgb(var(--accent));font-size:1.3rem;margin:6px;transition:.3s;
+}
+.social-links i:hover{background:rgb(var(--accent));color:white;transform:scale(1.2);}
 
-    .nav-container .links a::before {
-      position: absolute;
-      content: "";
-      bottom: -3px;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background-color: rgb(109,67,0);
-      transition: 0.2s linear;
-    }
+/* Button */
+button{padding:12px 22px;border-radius:14px;border:none;cursor:pointer;font-weight:600;background:rgb(var(--accent));color:white;transition:.3s;}
+button:hover{box-shadow:0 0 16px rgba(var(--accent),.7);}
 
-    .nav-container .links a:hover::before {
-      width: 100%;
-    }
+/* Image + Glow + Tilt */
+.hero-img {position:relative;transform-style:preserve-3d;transition:transform .4s ease;cursor:pointer;}
+.hero-img img{width:330px;border-radius:24px;animation:floatImg 4s ease-in-out infinite;}
+@keyframes floatImg{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+.hero-img::before{
+ content:"";position:absolute;inset:-25px;border-radius:32px;
+ background:radial-gradient(circle,rgba(var(--accent),.45),transparent 70%);
+ filter:blur(45px);opacity:.75;z-index:-1;transition:.5s;
+}
+.hero-img:hover::before{opacity:1;filter:blur(65px);}
+.hero-img.no-tilt{transform:rotateX(0deg) rotateY(0deg) scale(1);}
 
-    .nav-container .contact-btn {
-      background-color: transparent;
-      padding: 5px 20px;
-      border-radius: 20px;
-      border: 2px solid rgb(109,67,0);
-      transition: 0.2s linear;
-    }
+/* Projects Section */
+.section-title{text-align:center;font-size:2.2rem;font-weight:600;margin-bottom:50px;color:rgb(var(--fg));}
+.projects-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:40px;padding:0 90px 120px;}
+.project-card{
+ background:var(--glass);backdrop-filter:blur(var(--blur));
+ border:1px solid var(--glass-border);border-radius:26px;
+ padding:22px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);
+ transition:0.45s;position:relative;overflow:hidden;
+}
+.project-card::before{
+ content:"";position:absolute;inset:-50px;
+ background:radial-gradient(circle,rgba(var(--accent),.35),transparent 70%);
+ filter:blur(55px);opacity:0;transition:0.45s;z-index:-1;
+}
+.project-card:hover::before{opacity:1;}
+.project-card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 18px 38px rgba(var(--accent),.35);}
+.project-card img{width:100%;border-radius:18px;margin-bottom:18px;}
+.project-card h3{font-weight:600;margin-bottom:8px;}
+.project-card p{opacity:.78;margin-bottom:14px;}
+.project-card a{text-decoration:none;font-weight:600;color:rgb(var(--accent));transition:.3s;}
+.project-card a:hover{opacity:.75;}
 
-    .nav-container .contact-btn a {
-      color: white;
-      transition: 0.3s linear;
-    }
-
-    .nav-container .contact-btn:hover, 
-    .nav-container .contact-btn:hover a {
-      background-color: rgb(109,67,0);
-      color: white;
-    }
-
-    .dropdown {
-      z-index: 100;
-      position: absolute;
-      top: 0;
-      transform: translateY(-500px);
-      width: 100%;
-      height: auto;
-      backdrop-filter: brightness(40%) blur(3px);
-      box-shadow: 0 0 20px black;
-      transition: 0.2s linear;
-    }
-
-    .dropdown .links a {
-      color: white;
-      display: flex;
-      text-decoration: none;
-      justify-content: center;
-      padding: 15px 0;
-      align-items: center;
-      transition: 0.2s linear;
-    }
-
-    .dropdown .links a:hover {
-      background-color: rgb(109,67,0);
-    }
-
-    section {
-      width: 100%;
-      height: 90vh;
-    }
-
-    .main-container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-
-    .main-container .image {
-      z-index: -1;
-      width: 40%;
-    }
-
-    .main-container .image img {
-      width: 95%;
-    }
-
-    .main-container .content {
-      color: black;
-      width: 40%;
-      min-height: 100px;
-    }
-
-    .content h1 {
-      font-size: clamp(1rem, 2rem + 5vw, 3rem);
-    }
-
-    .content h1 span {
-      color: rgb(109,67,0);
-      text-shadow: 0 0 10px rgb(109,67,0);
-    }
-
-    .content .typewriter {
-      font-weight: 600;
-      font-size: clamp(1rem, 1rem + 5vw, 2rem);
-    }
-
-    .content .typewriter span {
-      color: rgb(109,67,0);
-      font-size: 2.5rem;
-      text-shadow: 0 0 5px rgb(109,67,0);
-      position: relative;
-      transition: 0.3s linear;
-    }
-
-    .typewriter span::before {
-      content: "Developer";
-      animation: words 15s infinite;
-    }
-
-    .typewriter span::after {
-      content: "";
-      position: absolute;
-      width: calc(100% + 8px);
-      height: 100%;
-      border-left: 3px solid black;
-      animation: cursor 0.6s linear infinite;
-    }
-
-    @keyframes cursor {
-      to { border-left: 3px solid #b74b4b; }
-    }
-
-    @keyframes words {
-      0%, 33% { content: "Developer"; }
-      34%, 66% { content: "Data Scientist"; }
-      67%, 100% { content: "Photographer"; }
-    }
-
-    .content p {
-      font-size: clamp(0.4rem, 0.2rem + 9vw, 1rem);
-      margin: 10px 0;
-    }
-
-    .social-links i {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 3rem;
-      height: 3rem;
-      background-color: transparent;
-      border: 0.2rem solid rgb(109,67,0);
-      border-radius: 50%;
-      color: rgb(109,67,0);
-      margin: 5px 10px;
-      font-size: 1.5rem;
-      transition: 0.2s linear;
-    }
-
-    .social-links i:hover {
-      scale: 1.3;
-      color: white;
-      background-color: rgb(109,67,0);
-      filter: drop-shadow(0 0 10px rgb(109,67,0));
-    }
-
-    .download-btn {
-      display: inline-block;
-      text-decoration: none;
-    }
-
-    .download-btn button {
-      width: 300px;
-      height: 49px;
-      background-color: rgb(109,67,0);
-      color: white;
-      border: none;
-      outline: none;
-      font-size: 1rem;
-      font-weight: 700;
-      border-radius: 6px;
-      transition: 0.3s linear;
-      cursor: pointer;
-    }
-
-    .download-btn button:hover {
-      scale: 1.1;
-      color: rgb(109,67,0);
-      border: 2px solid rgb(109,67,0);
-      background-color: transparent;
-      box-shadow: 0 0 50px rgb(109,67,0);
-    }
-
-    @media (max-width:884px) {
-      body { overflow-y: visible; }
-      nav .logo {
-        position: absolute;
-        top: 16px;
-        left: 15px;
-        font-size: 1.5rem;
-      }
-      .main-container { flex-direction: column; }
-      .nav-container .links { display: none; }
-      .hamburg, .cancel { display: block; }
-      .main-container .content { width: 80%; }
-      .main-container .image { width: 80%; margin-bottom: 0px; }
-      .social-links i { width: 2.5rem; height: 2.5rem; font-size: 1.5rem; }
-      .cancel { color: white; }
-    }
-  </style>
+@media(max-width:768px){.projects-container{padding:0 20px 80px;}}
+</style>
 </head>
-
 <body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo" data-aos="zoom-in" data-aos-duration="1000">
-        <span>J.K.BISWAS</span>
-      </div>
-      <div class="links">
-        <div class="link" data-aos="fade-up" data-aos-delay="100"><a href="#">Home</a></div>
-        <div class="link" data-aos="fade-up" data-aos-delay="200"><a href="about.html">About</a></div>
-        <div class="link" data-aos="fade-up" data-aos-delay="300"><a href="skill.html">Skills</a></div>
-        <div class="link" data-aos="fade-up" data-aos-delay="400"><a href="social.html">Social Media</a></div>
-        <div class="link" data-aos="fade-up" data-aos-delay="500"><a href="#">Blogs</a></div>
-        <div class="link contact-btn" data-aos="fade-up" data-aos-delay="600"><a href="contactus.html">Contact Us</a></div>
-      </div>
-      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+
+<div class="blob"></div><div class="blob"></div>
+
+<nav>
+ <a href="#">Home</a>
+ <a href="about.html">About</a>
+ <a href="skill.html">Skills</a>
+ <a href="social.html">Social Media</a>
+ <a href="#">Blogs</a>
+ <a href="contactus.html">Contact</a>
+ <i id="theme-toggle" class="fa-solid fa-moon"></i>
+</nav>
+
+<section>
+ <div class="hero">
+
+   <!-- Text Left -->
+   <div class="hero-text card" data-aos="fade-LEFT">
+     <h1>Hey I'm <span>Jibak Kanti Biswas</span></h1>
+     <div class="typewriter">I'm a <span id="type-text"></span></div>
+     <p>I am pursuing B.C.A from Arka Jain University, aspiring to be a developer. Passionate about Data Science, Coding & Design.</p>
+     <div class="social-links">
+       <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+       <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+     </div>
+     <a href="Jibak-kanti-Biswas,AJU231592.pdf" download><button>Download CV</button></a>
+   </div>
+
+   <!-- Image Right -->
+   <div class="hero-img card" data-aos="zoom-in"><img src="main.png"></div>
+
+ </div>
+</section>
+
+<!-- ✅ PROJECTS SECTION -->
+<section id="projects">
+  <h2 class="section-title" data-aos="fade-up">Projects</h2>
+
+  <div class="projects-container">
+
+    <div class="project-card" data-aos="zoom-in">
+      <img src="project1.png">
+      <h3>Portfolio Website</h3>
+      <p>Premium glassmorphism website with animations & dark mode.</p>
+      <a href="#">View Project →</a>
     </div>
 
-    <div class="dropdown">
-      <div class="links">
-        <a href="#">Home</a>
-        <a href="about.html">About</a>
-        <a href="skill.html">Skills</a>
-        <a href="social.html">Social Media</a>
-        <a href="#">Blogs</a>
-        <a href="contactus.html">Contact Us</a>
-        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-      </div>
+    <div class="project-card" data-aos="zoom-in" data-aos-delay="150">
+      <img src="project2.png">
+      <h3>Weather App</h3>
+      <p>Real-time weather UI with smooth API integration.</p>
+      <a href="#">View Project →</a>
     </div>
-  </nav>
 
-  <section>
-    <div class="main-container">
-      <div class="image" data-aos="zoom-out-right" data-aos-duration="2500">
-        <img src="main.png" alt="Profile Image">
-      </div>
-      <div class="content">
-        <h1 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">
-          Hey I'm <span>Jibak Kanti Biswas</span>
-        </h1>
-        <div class="typewriter" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">
-          I'm a <span></span>
-        </div>
-        <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">
-          I am pursuing B.C.A from Arka Jain University, aspiring to be a developer. I am passionate
-          about learning and growing in Data Science, coding, and design. I've also participated in
-          multiple seminars and boot camps on game development and technology.
-        </p>
-
-        <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
-          <a href="https://www.linkedin.com/in/jibak-kanti-biswas-816528218"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://x.com/JKBiswas17"><i class="fa-brands fa-x-twitter"></i></a>
-        </div>
-
-        <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
-          <a href="Jibak-kanti-Biswas,AJU231592.pdf" download class="download-btn">
-            <button>Download CV</button>
-          </a>
-        </div>
-      </div>
+    <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+      <img src="project3.png">
+      <h3>Student Management System</h3>
+      <p>CRUD-based student data management in Python + SQL.</p>
+      <a href="#">View Project →</a>
     </div>
-  </section>
 
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-  <script>
-    AOS.init({ offset: 0 });
+  </div>
+</section>
 
-    function hamburg() {
-      document.querySelector(".dropdown").style.transform = "translateY(0px)";
-    }
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init({offset:0});</script>
 
-    function cancel() {
-      document.querySelector(".dropdown").style.transform = "translateY(-500px)";
-    }
-  </script>
+<script>
+// Typing Effect
+const words=["Developer","Designer","Data Science Learner","Photographer"];
+let i=0,j=0,isDeleting=false;
+function typeEffect(){
+ let word=words[i];
+ document.getElementById("type-text").textContent=isDeleting?word.slice(0,j--):word.slice(0,j++);
+ if(j===word.length+1) isDeleting=true;
+ if(j===0&&isDeleting){isDeleting=false;i=(i+1)%words.length;}
+ setTimeout(typeEffect,isDeleting?70:120);
+} typeEffect();
+</script>
+
+<script>
+// Dark Mode Toggle
+const toggle=document.getElementById("theme-toggle");
+toggle.onclick=()=>{document.body.classList.toggle("dark");toggle.classList.toggle("fa-sun");toggle.classList.toggle("fa-moon");};
+</script>
+
+<script>
+// 3D Tilt
+const tilt=document.querySelector('.hero-img');
+tilt.addEventListener('mousemove',(e)=>{
+ const rect=tilt.getBoundingClientRect();
+ const x=e.clientX-rect.left,y=e.clientY-rect.top;
+ tilt.style.transform=`rotateX(${-(y/rect.height-.5)*20}deg) rotateY(${(x/rect.width-.5)*20}deg) scale(1.05)`;
+});
+tilt.addEventListener('mouseleave',()=>{tilt.classList.add('no-tilt');setTimeout(()=>{tilt.style.transform='';tilt.classList.remove('no-tilt');},200);});
+</script>
+
+<script>
+// Smooth Page Transitions
+document.addEventListener("DOMContentLoaded",()=>document.body.classList.add("fade-in"));
+document.querySelectorAll('a[href]').forEach(link=>{
+ link.addEventListener("click",(e)=>{
+   const url=link.getAttribute("href");
+   if(!url||url.startsWith("#"))return;
+   e.preventDefault();
+   document.body.classList.add("fade-out");
+   setTimeout(()=>window.location.href=url,450);
+ });
+});
+</script>
+
 </body>
 </html>
