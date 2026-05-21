@@ -1,29 +1,437 @@
+<!doctype html>
 <html lang="en">
- <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Form</title>
-<link rel="stylesheet" href="contactus.css">
- </head>
-<div class="contact-container">
-<form action="https://api.web3forms.com/submit" method="POST" class="contact-left">
-<div class="contact-left-title">
-  <button><a href="index.html">HOME</a></button>
-<h2>Get in touch</h2>
-<hr>
-</div>
-<input type="hidden" name="access_key" value="59d8e8a2-0487-4360-92ba-eaf50e86a818">
-<input type="text" name="name" placeholder="Your name" class="contact-input" required>
-<input type="text" name="email" placeholder="Your email" class="contact-input" required>
-<textarea name="message" placeholder="Your message" class="contact-input" class="required"></textarea>
-<button type="Submit">Submit <img src="assets/arrow_icon.png" alt=""></button>
-</form>
-<div class="contact-right">
-    <img src="right_img.png" alt="">
-</div>
-</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Glass Contact Form</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: #0f172a;
+        position: relative;
+        padding: 20px;
+      }
+
+      /* Animated Gradient Background */
+
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.6;
+        animation: float 8s infinite alternate ease-in-out;
+      }
+
+      body::before {
+        background: #00d4ff;
+        top: -120px;
+        left: -120px;
+      }
+
+      body::after {
+        background: #7c3aed;
+        bottom: -120px;
+        right: -120px;
+        animation-delay: 2s;
+      }
+
+      @keyframes float {
+        from {
+          transform: translateY(0px) translateX(0px);
+        }
+        to {
+          transform: translateY(40px) translateX(30px);
+        }
+      }
+
+      /* Background Grid */
+
+      .bg-grid {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+
+        background-size: 40px 40px;
+
+        z-index: 0;
+        opacity: 0.4;
+      }
+
+      /* Floating Shapes */
+
+      .floating-icons {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .floating-icons span {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.12);
+        animation: floatIcons 12s linear infinite;
+        user-select: none;
+      }
+
+      .floating-icons span:nth-child(1) {
+        top: 10%;
+        left: 8%;
+        font-size: 60px;
+        animation-duration: 14s;
+      }
+
+      .floating-icons span:nth-child(2) {
+        top: 70%;
+        left: 15%;
+        font-size: 30px;
+        animation-duration: 10s;
+      }
+
+      .floating-icons span:nth-child(3) {
+        top: 20%;
+        right: 10%;
+        font-size: 50px;
+        animation-duration: 16s;
+      }
+
+      .floating-icons span:nth-child(4) {
+        bottom: 12%;
+        right: 18%;
+        font-size: 45px;
+        animation-duration: 11s;
+      }
+
+      .floating-icons span:nth-child(5) {
+        top: 50%;
+        right: 45%;
+        font-size: 70px;
+        animation-duration: 18s;
+      }
+
+      @keyframes floatIcons {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+          transform: translateY(-25px) rotate(180deg);
+        }
+
+        100% {
+          transform: translateY(0px) rotate(360deg);
+        }
+      }
+
+      /* Main Container */
+
+      .contact-container {
+        width: 100%;
+        max-width: 1150px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 60px;
+
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
+        border-radius: 32px;
+
+        padding: 60px;
+
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.3),
+          inset 0 1px 1px rgba(255, 255, 255, 0.15);
+
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Left Section */
+
+      .contact-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .contact-left-title span {
+        color: #38bdf8;
+        font-size: 15px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .contact-left-title h1 {
+        color: white;
+        font-size: 52px;
+        line-height: 1.1;
+        margin-top: 10px;
+        font-weight: 700;
+      }
+
+      .contact-left-title p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 18px;
+        font-size: 15px;
+        line-height: 1.8;
+        max-width: 500px;
+      }
+
+      /* Inputs */
+
+      .contact-input {
+        width: 100%;
+        height: 58px;
+
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        border-radius: 16px;
+
+        padding: 0 20px;
+
+        color: white;
+        font-size: 15px;
+
+        outline: none;
+
+        transition: 0.3s ease;
+      }
+
+      textarea.contact-input {
+        height: 160px;
+        resize: none;
+        padding-top: 18px;
+      }
+
+      .contact-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .contact-input:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      /* Button */
+
+      .submit-btn {
+        width: 190px;
+        height: 58px;
+
+        border: none;
+        border-radius: 18px;
+
+        background: linear-gradient(135deg, #38bdf8, #2563eb);
+
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.35s ease;
+
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn::before {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.25);
+        transform: skewX(-25deg);
+        left: -120px;
+        top: 0;
+        transition: 0.5s;
+      }
+
+      .submit-btn:hover::before {
+        left: 220px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(37, 99, 235, 0.4);
+      }
+
+      /* Right Side */
+
+      .contact-right {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .contact-right img {
+        width: 100%;
+        max-width: 430px;
+
+        border-radius: 28px;
+
+        object-fit: cover;
+
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+
+        animation: levitate 4s infinite ease-in-out;
+      }
+
+      @keyframes levitate {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      /* Responsive */
+
+      @media (max-width: 980px) {
+        .contact-container {
+          flex-direction: column;
+          padding: 40px 25px;
+        }
+
+        .contact-left-title h1 {
+          font-size: 40px;
+        }
+
+        .contact-right img {
+          max-width: 320px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .contact-left-title h1 {
+          font-size: 32px;
+        }
+
+        .contact-left-title p {
+          font-size: 14px;
+        }
+
+        .submit-btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Background Grid -->
+
+    <div class="bg-grid"></div>
+
+    <!-- Floating Shapes -->
+
+    <div class="floating-icons">
+      <span>✦</span>
+      <span>●</span>
+      <span>✧</span>
+      <span>◆</span>
+      <span>✦</span>
+    </div>
+
+    <!-- Main Container -->
+
+    <div class="contact-container">
+      <!-- Left Section -->
+
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="contact-left"
+      >
+        <div class="contact-left-title">
+          <span>CONTACT US</span>
+
+          <h1>Let's Build Something Amazing Together.</h1>
+
+          <p>
+            Have a project idea, business inquiry, or just want to say hello?
+            Fill out the form and we'll get back to you shortly.
+          </p>
+        </div>
+
+        <input
+          type="hidden"
+          name="access_key"
+          value="59d8e8a2-0487-4360-92ba-eaf50e86a818"
+        />
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          class="contact-input"
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          class="contact-input"
+          required
+        />
+
+        <textarea
+          name="message"
+          placeholder="Write your message..."
+          class="contact-input"
+          required
+        ></textarea>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+
+      <!-- Right Side -->
+
+      <div class="contact-right">
+        <img src="right_img.png" alt="Contact Illustration" />
+      </div>
+    </div>
+  </body>
 </html>
-
-
